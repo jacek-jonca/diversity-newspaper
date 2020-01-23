@@ -1,0 +1,32 @@
+sudo: required
+dist: trusty
+os: linux
+language: generic
+services: docker
+env:
+  global:
+  - secure: https://docs.travis-ci.com/user/environment-variables/#encrypting-environment-variables
+  - GIT_NAME: Travis CI
+  - GIT_EMAIL: builds@travis-ci.org
+  - TRAVIS_REPO_SLUG: jacek-jonca/diversity-newspaper
+  - GIT_BRANCH: master
+  - secure: xdTgJv9SMMfTaYfheGwZDSEUcPVVFtztNNK42qmifA1NETldxuujjwm4abMKDK5S02pkQyIjWUSO1y7KOB6sY6lpwH1c6y2tXXxfGwvJGeDoZH5DI8hLdAYjRVvoinc0hfbK4Ds1iJab54zI268X/P/jN8LDfh77RdBTRNDzMRu0YHuKd0KMcDkMulMa6nAna0Ov9SPA+gMWlRLZ1bGu+hWG6T62qaNwhTw8bacD77MsWqck008fdRBPzrCh+dHadWhL4d2X8xDrql05DAmeZhPV6d5qdQwnk7DuqwAnQSpT9U7FU2+88fBwsqOcX+7AagSQnQjfXc4GYjf/hkeZom49hEcK9c7USSCPr60VK0LYocKXgMRGj7qWwQUTKnDncChl370rxdfLI1Whaq7DdapE/QlIqCAwKQ3MX5PKvP9b5e9t1DdjmqXcQMVxjUFEX3OH5o2POuHNx3WX8l3rSKmDS8AKq46tWDYi6vOU89vuHnIacyRWMe66RCegVYUvO0AWcd0V98c6jkX+eNNFpwlCWq5lzREqdzihTo6YelW+aofZYZ1vzvn6tt5VuUHnldoTiksNAoJMSvDsuIn+AR/o9/1w5PO3P81ONtnmvgTNSx9hpUeXUVBxXJKVxRV7mu3TgAytQx9Ysjvnb2FrVvQzi1b1k1B1idokOZPSVn0=
+script:
+- "./changefile.sh"
+- docker run --mount src=$TRAVIS_BUILD_DIR,target=/usr/src/tex,type=bind dxjoke/tectonic-docker
+  /bin/sh -c "tectonic diversity.tex"
+before_deploy:
+- "./deploy.sh"
+deploy:
+  provider: releases
+  api_key:
+    secure: "${GH_TOKEN}"
+  file:
+  - diversity.pdf
+  skip_cleanup: true
+  on:
+    repo: jacek-jonca/diversity-newspaper
+    tags: false
+    all_branches: true
+notifications:
+  email: false
