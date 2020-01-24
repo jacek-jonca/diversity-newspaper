@@ -5,7 +5,6 @@ language: generic
 services: docker
 env:
   global:
-  - secure: https://docs.travis-ci.com/user/environment-variables/#encrypting-environment-variables
   - GIT_NAME: Travis CI
   - GIT_EMAIL: builds@travis-ci.org
   - TRAVIS_REPO_SLUG: jacek-jonca/diversity-newspaper
@@ -16,8 +15,15 @@ script:
 - wget https://raw.githubusercontent.com/blang/latex-docker/master/latexdockercmd.sh
 - chmod +x latexdockercmd.sh
 #- "./latexdockercmd.sh latexmk -xelatex -interaction=nonstopmode -halt-on-error diversity.tex"
-- "./latexdockercmd.sh latexmk -cd -f -interaction=batchmode -pdf diversity.tex -outdir=./"
+- "./latexdockercmd.sh latexmk -cd -f -interaction=batchmode -pdf diversity.tex -outdir=$TRAVIS_BUILD_DIR/"
 #- "./latexdockercmd.sh pdflatex diversity.tex"
+# Force push the PDF to GitHub
+- cd $TRAVIS_BUILD_DIR
+- git checkout --orphan $TRAVIS_BRANCH-pdf
+- git rm -rf .
+- git add -f paper/ms.pdf
+- git -c user.name='travis' -c user.email='travis' commit -m "building the paper"
+- git push -q -f https://$GI_NAME:$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG $TRAVIS_BRANCH-pdf
 before_deploy:
 - "./deploy.sh"
 deploy:
