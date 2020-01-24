@@ -13,10 +13,10 @@ env:
   - secure: ${GH_TOKEN}
 script:
 - "./changefile.sh"
-— wget https://raw.githubusercontent.com/blang/latex-docker/master/latexdockercmd.sh
-— chmod +x latexdockercmd.sh
-— #"./latexdockercmd.sh latexmk -xelatex -interaction=nonstopmode -halt-on-error diversity.tex"
-— "./latexdockercmd.sh latexmk -cd -f -interaction=batchmode -pdf diversity.tex"
+- wget https://raw.githubusercontent.com/blang/latex-docker/master/latexdockercmd.sh
+- chmod +x latexdockercmd.sh
+- #"./latexdockercmd.sh latexmk -xelatex -interaction=nonstopmode -halt-on-error diversity.tex"
+- "./latexdockercmd.sh latexmk -cd -f -interaction=batchmode -pdf diversity.tex"
 - #"./latexdockercmd.sh pdflatex diversity.tex"
 before_deploy:
 - "./deploy.sh"
