@@ -13,7 +13,6 @@ env:
   - secure: ${GH_TOKEN}
 script:
 - "./changefile.sh"
-script: 
 — wget https://raw.githubusercontent.com/blang/latex-docker/master/latexdockercmd.sh 
 — chmod +x latexdockercmd.sh 
 — #"./latexdockercmd.sh latexmk -xelatex -interaction=nonstopmode -halt-on-error diversity.tex"
