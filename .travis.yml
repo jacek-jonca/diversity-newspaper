@@ -9,7 +9,7 @@ env:
   - GIT_NAME: Travis CI
   - GIT_EMAIL: builds@travis-ci.org
   - TRAVIS_REPO_SLUG: jacek-jonca/diversity-newspaper
-  - GIT_BRANCH: master
+  - GIT_BRANCH: latexdocker
   - secure: ${GH_TOKEN}
 script:
 - "./changefile.sh"
