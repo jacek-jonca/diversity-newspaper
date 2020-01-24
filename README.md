@@ -5,3 +5,7 @@
 chmod +x ./*.sh
 
 https://docs.travis-ci.com/user/environment-variables/#encrypting-environment-variables
+
+or
+
+set ${GH_TOKEN} at https://travis-ci.org/jacek-jonca/diversity-newspaper/settings
