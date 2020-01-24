@@ -13,8 +13,12 @@ env:
   - secure: ${GH_TOKEN}
 script:
 - "./changefile.sh"
-- docker run --mount src=$TRAVIS_BUILD_DIR,target=/usr/src/tex,type=bind dxjoke/tectonic-docker
-  /bin/sh -c "tectonic diversity.tex"
+script: 
+— wget https://raw.githubusercontent.com/blang/latex-docker/master/latexdockercmd.sh 
+— chmod +x latexdockercmd.sh 
+— #"./latexdockercmd.sh latexmk -xelatex -interaction=nonstopmode -halt-on-error diversity.tex"
+— "./latexdockercmd.sh latexmk -cd -f -interaction=batchmode -pdf diversity.tex"
+- #"./latexdockercmd.sh pdflatex diversity.tex"
 before_deploy:
 - "./deploy.sh"
 deploy:

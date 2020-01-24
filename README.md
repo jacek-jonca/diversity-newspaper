@@ -1,5 +1,6 @@
 [![Build Status](https://img.shields.io/travis/jacek-jonca/diversity-newspaper?style=for-the-badge)](https://travis-ci.org/jacek-jonca/diversity-newspaper) [![Latest PDF](https://img.shields.io/badge/PDF-Download-ff69b4?style=for-the-badge)](https://docs.google.com/viewer?url=https://github.com/jacek-jonca/diversity-newspaper/releases/latest/download/diversity.pdf)
 
+This is a Latex Docker branch
 
 chmod +x ./*.sh
 
