@@ -9,3 +9,6 @@ https://docs.travis-ci.com/user/environment-variables/#encrypting-environment-va
 or
 
 set ${GH_TOKEN} at https://travis-ci.org/jacek-jonca/diversity-newspaper/settings
+
+https://github.com/jacek-jonca/diversity-newspaper/releases/latest/download/diversity.pdf
+https://github.com/jacek-jonca/diversity-newspaper/blob/master/diversity.tex
