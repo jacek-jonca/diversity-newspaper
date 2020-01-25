@@ -19,12 +19,16 @@ script:
 #- "./latexdockercmd.sh pdflatex diversity.tex"
 # Force push the PDF to GitHub
 - cd $TRAVIS_BUILD_DIR
+- mkdir pdf
+- cp diversity.pdf ./pdf/
+- cd pdf
 - git checkout --orphan $TRAVIS_BRANCH-pdf
 - git rm -rf .
 - git add -f diversity.pdf
 - git -c user.name='travis' -c user.email='travis' commit -m "building the PDF"
 - git push -q -f https://jacek-jonca:$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG $TRAVIS_BRANCH-pdf
 before_deploy:
+- cd $TRAVIS_BUILD_DIR
 - "./deploy.sh"
 deploy:
   provider: releases
