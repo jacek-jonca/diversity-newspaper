@@ -23,7 +23,7 @@ script:
 - git rm -rf .
 - git add -f diversity.pdf
 - git -c user.name='travis' -c user.email='travis' commit -m "building the PDF"
-- git push -q -f https://$GI_NAME:$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG $TRAVIS_BRANCH-pdf
+- git push -q -f https://jacek-jonca:$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG $TRAVIS_BRANCH-pdf
 before_deploy:
 - "./deploy.sh"
 deploy:
