@@ -21,8 +21,8 @@ script:
 - cd $TRAVIS_BUILD_DIR
 - git checkout --orphan $TRAVIS_BRANCH-pdf
 - git rm -rf .
-- git add -f paper/ms.pdf
-- git -c user.name='travis' -c user.email='travis' commit -m "building the paper"
+- git add -f diversity.pdf
+- git -c user.name='travis' -c user.email='travis' commit -m "building the PDF"
 - git push -q -f https://$GI_NAME:$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG $TRAVIS_BRANCH-pdf
 before_deploy:
 - "./deploy.sh"
