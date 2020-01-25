@@ -11,13 +11,13 @@ env:
   - GIT_BRANCH: latexdocker
   - secure: ${GH_TOKEN}
 script:
-- "./changefile.sh"
+#- "./changefile.sh"
 - wget https://raw.githubusercontent.com/blang/latex-docker/master/latexdockercmd.sh
 - chmod +x latexdockercmd.sh
 #- "./latexdockercmd.sh latexmk -xelatex -interaction=nonstopmode -halt-on-error diversity.tex"
 - "./latexdockercmd.sh latexmk -cd -f -interaction=batchmode -pdf diversity.tex -outdir=$TRAVIS_BUILD_DIR/"
 #- "./latexdockercmd.sh pdflatex diversity.tex"
-# Force push the PDF to GitHub
+# Push the PDF to a PDF branch on GitHub
 - cd $TRAVIS_BUILD_DIR
 - mkdir pdf
 - cp diversity.pdf ./pdf/
@@ -27,19 +27,19 @@ script:
 - git add -f diversity.pdf
 - git -c user.name='travis' -c user.email='travis' commit -m "building the PDF"
 - git push -q -f https://jacek-jonca:$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG $TRAVIS_BRANCH-pdf
-before_deploy:
-- cd $TRAVIS_BUILD_DIR
-- "./deploy.sh"
-deploy:
-  provider: releases
-  api_key:
-    secure: ${GH_TOKEN}
-  file:
-  - diversity.pdf
-  skip_cleanup: true
-  on:
-    repo: jacek-jonca/diversity-newspaper
-    tags: false
-    all_branches: true
+#before_deploy:
+#- cd $TRAVIS_BUILD_DIR
+#- "./deploy.sh"
+#deploy:
+#  provider: releases
+#  api_key:
+#    secure: ${GH_TOKEN}
+#  file:
+#  - diversity.pdf
+#  skip_cleanup: true
+#  on:
+#    repo: jacek-jonca/diversity-newspaper
+#    tags: false
+#    all_branches: true
 notifications:
   email: false
